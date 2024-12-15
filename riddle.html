@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Riddle Quiz</title>
+    <style>
+        /* Custom Styles */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f8f8f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #031474;
+            margin-top: 20px;
+        }
+
+        #riddle-container {
+            background-color: #fff;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        input {
+            padding: 8px;
+            margin-top: 10px;
+            width: 80%;
+            max-width: 300px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #031474;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0901ab;
+        }
+
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        #result {
+            font-size: 20px;
+            font-weight: bold;
+            color: #031474;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Recipe Riddle Quiz</h1>
+        <p>Can you solve the riddles? Type your answer below!</p>
+    </header>
+
+    <!-- Riddle App -->
+    <section id="riddle-container">
+        <p id="riddle-text">Click the button to get a riddle!</p>
+        <input type="text" id="user-answer" placeholder="Type your answer here">
+        <br>
+        <button onclick="generateRiddle()">New Riddle</button>
+        <button onclick="checkAnswer()">Submit Answer</button>
+        <p id="result"></p>
+    </section>
+
+    <!-- JavaScript -->
+    <script>
+        // Array of riddles and answers
+        const riddles = [
+            { question: "I am red and round and grow on a vine, I am used in sauce and on pizza—so divine! What am I?", answer: "tomato" },
+            { question: "I am sometimes boiled, sometimes fried, Serve me sunny-side up or scrambled with pride. What am I?", answer: "egg" },
+            { question: "I am white and fluffy and explode when I am hot, You eat me at movies right out of the pot. What am I?", answer: "popcorn" },
+            { question: "I am sweet and cold and loved by all, I am served in a cone so it does not fall. What am I?", answer: "ice cream" },
+            { question: "I am soft, round, and full of delight, A burger’s best friend in a tasty bite. What am I?", answer: "bun" }
+        ];
+
+        let currentRiddle = {}; // To store the current riddle
+
+        // Function to generate a random riddle
+        function generateRiddle() {
+            const riddleText = document.getElementById("riddle-text");
+            const userInput = document.getElementById("user-answer");
+            const result = document.getElementById("result");
+
+            // Clear previous inputs and results
+            userInput.value = "";
+            result.textContent = "";
+
+            // Pick a random riddle
+            const randomIndex = Math.floor(Math.random() * riddles.length);
+            currentRiddle = riddles[randomIndex];
+
+            // Display the riddle
+            riddleText.textContent = currentRiddle.question;
+        }
+
+        // Function to check the user's answer
+        function checkAnswer() {
+            const userInput = document.getElementById("user-answer").value.trim().toLowerCase();
+            const result = document.getElementById("result");
+
+            if (userInput === currentRiddle.answer) {
+                result.textContent = "Correct!";
+                result.style.color = "#031474"; // blue color
+            } else {
+                result.textContent = "Try again!";
+                result.style.color = "#FF5733"; // Red color
+            }
+        }
+    </script>
+</body>
+</html>
